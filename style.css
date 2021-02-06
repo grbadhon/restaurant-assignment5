@@ -1,0 +1,49 @@
+.input-form{
+    font-family: FontAwesome;
+
+}
+.nav-ancor{
+    font-weight: 700;
+    font-size: 16px;
+    
+}
+.tick-icon{
+    color: tomato;
+}
+.informations{
+    border: 1px solid goldenrod;
+    border-radius: 10px;
+    padding: 30px 50px;
+    height: 40%;
+}
+.informations h1,.informations h5,.informations p{
+margin: 0px;
+}
+.info-image{
+    overflow: hidden;
+    height: 200px;
+    width: 80%;
+    border-radius: 10px;
+}
+.item-collums{
+    margin-bottom: 50px;
+    border-radius: 10px;
+    
+}
+.food-title{
+    height: 50px;
+    
+    
+}
+.card img{
+    height: 180px;
+    width: 100%;
+}
+.full-card{
+    border: 0px;
+    
+}
+.card-body{
+    background-color:#F8F7F5 ;
+    
+}
