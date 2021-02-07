@@ -28,7 +28,7 @@ const searchFoodItems = items => {
             mealItemDiv.className = 'col-md-3 item-collums'
             
                     let cardHtml = `
-                    <div onclick="getIngredientsAndMeasure(${itemId})" class="card rounded-3 border-0" >
+                    <div onclick="getIngredientsMeasureInformation(${itemId})" class="card rounded-3 border-0" >
                         <img src="${itemImg}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-title food-title text-center">${itemName}</h6>
@@ -70,7 +70,7 @@ function removePreviousItems(){
 
 
 // ingredients item show function starts here
-const getIngredientsAndMeasure = id => {
+const getIngredientsMeasureInformation = id => {
     document.getElementById('ingredient-section').innerText = "";
 
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -132,7 +132,7 @@ const getIngredientsAndMeasure = id => {
             ingredientInformations += `
             <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> ${measure} ${ingredient} </p>
 
-            `
+            `;
               
         });
 
