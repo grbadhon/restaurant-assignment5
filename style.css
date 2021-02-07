@@ -24,7 +24,7 @@
 }
 
 .informations h1,.informations h5,.informations p{
-margin: 0px;
+    margin: 0px;
 }
 .info-image{
     overflow: hidden;
