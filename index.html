@@ -12,6 +12,7 @@
 <body>
     <header>
         <section class="container">
+            <!-- Navigation bar -->
             <nav class="navbar navbar-expand-lg navbar-light nav-spacing">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
@@ -26,7 +27,7 @@
                       <a class="nav-link active nav-ancor me-5" aria-current="page" href="#">Home</a>
                       <a class="nav-link nav-ancor me-5" href="#">About</a>
                       <a class="nav-link nav-ancor me-5" href="#">Recipes</a>
-                      <a class="nav-link nav-ancor me-5" href="#" tabindex="-1" aria-disabled="true">Blog</a>
+                      <a class="nav-link nav-ancor me-5" href="#" tabindex="-1" >Blog</a>
                     </div>
                   </div>
                 </div>
@@ -35,6 +36,7 @@
     </header>
     
         <main>
+            <!-- If anything not found section -->
             <div id="not-found-div">
                 <div class="div col-md-12">
                     <p class="text-center not-found-text"><i class="fa fa-times" aria-hidden="true"></i> Sorry, The name you entered is not found in our database</p>
@@ -44,13 +46,14 @@
                     <img src="./images/not-fount.gif" alt="">
                 </div>
             </div>
+
+            <!-- Search area input section -->
             <div class="container">
                 <form class="col-md-6 m-auto py-5">
                     <div class="input-group mb-3">
-                        <input id="search-input" type="search" class="form-control input-form"
-                            placeholder="&#xF002; Search for Meal ...">
+                            <input id="search-input" type="search" class="form-control input-form" placeholder="&#xF002; Search for Meal ...">
                         <div class="input-group-append">
-                            <button id="search-button" type="button" class="btn btn-danger">Search</button>
+                            <button id="search-button" type="button" class="btn btn-danger search-button">Search</button>
                         </div>
                     </div>
                 </form>

@@ -1,42 +1,41 @@
+// Search button event start
+
 const searchBtn = document.getElementById('search-button');
 searchBtn.addEventListener('click', function(){
     
     const itemName = document.getElementById('search-input').value;
-    // console.log(itemName);
 
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+itemName)
     .then(res => res.json())
     .then(data => {
-        // console.log(data);
         removePreviousItems();
-        addFoodItems(data);
+        searchFoodItems(data);
 
     })
     
 })
+// Search button event end
 
-const addFoodItems = items => {
-    // console.log(items.meals)
+// Search food item function start here
+const searchFoodItems = items => {
     const foodMeals = items.meals;
-    if(items.meals){
-console.log(items.meals);
+    if(foodMeals){
         items.meals.forEach(item => {
-            // const item = foodMeals[i];
             const itemName = item.strMeal;
             const itemImg = item.strMealThumb;
             const itemId = item.idMeal;
             const mealItemDiv = document.createElement('div');
             mealItemDiv.className = 'col-md-3 item-collums'
-            // style="width: 18rem;
+            
                     let cardHtml = `
                     <div onclick="getIngredientsAndMeasure(${itemId})" class="card rounded-3 border-0" >
                         <img src="${itemImg}" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h6 class="card-title food-title text-center">${itemName}</h6>
+                            <h6 class="card-title food-title text-center">${itemName}</h6>
                         </div>
                     </div>
                   
-                    `
+                    `;
                     mealItemDiv.innerHTML = cardHtml;
     
             
@@ -44,10 +43,8 @@ console.log(items.meals);
             parentNode.appendChild(mealItemDiv);
         });
 
-       
-
-
-    }
+     }
+    //  If not found any food item(condition return false)
     else{
         console.log("'not found'")
         
@@ -56,6 +53,10 @@ console.log(items.meals);
     }
     
 }
+// Search food item function end here
+
+
+// Previous Items Remove function start here
 
 function removePreviousItems(){
     document.getElementById('ingredient-section').innerText = "";
@@ -65,7 +66,10 @@ function removePreviousItems(){
     parentNode.innerText = "";
 } 
 
-// ingredients item show
+//Previous Items Remove function ends here
+
+
+// ingredients item show function starts here
 const getIngredientsAndMeasure = id => {
     document.getElementById('ingredient-section').innerText = "";
 
@@ -73,84 +77,68 @@ const getIngredientsAndMeasure = id => {
     .then(response => response.json())
     .then(data => {
         const meal = data.meals[0];
-        const myMeal = data.meals[0] ;
-        const keys = Object.keys(myMeal);
-
-        const ingredientsArray = [];
-        const measureArray = [];
-        keys.forEach(key => {
+        const elements = Object.keys(meal);
+        const strIngredientArray = [];
+        const strMeasureArray = [];
+        elements.forEach(element => {
             
-            if (key.startsWith('strIngredient')  && myMeal[key] != null && myMeal[key] != "" ) {
-
-                ingredientsArray.push(myMeal[key])
+            if (element.startsWith('strIngredient')  && meal[element] != null && meal[element] != "" ) {
+                strIngredientArray.push(meal[element]);
             }
         });
         
-        keys.forEach(key => {
+        elements.forEach(element => {
             
-            if (key.startsWith('strMeasure') && myMeal[key] != "" && myMeal[key] != null && myMeal[key] != " " ) {
+            if (element.startsWith('strMeasure') && meal[element] != " " && meal[element] != "" && meal[element] != null  ) {
+                strMeasureArray.push(meal[element]);
 
-                measureArray.push(myMeal[key])
             }
         });
 
-        console.log(ingredientsArray);
-        console.log(measureArray);
 
         const showIngredientsSection = document.getElementById('ingredient-section');
         const ingredientItem = document.createElement('div')
 
-        const card = `
-        <div class="row d-flex justify-content-centerd-flex justify-content-center">
-              <div class="col-md-5 informations">
-                  <div class="info-image">
-                      <img src="${meal.strMealThumb}" width="100%" alt="">
-                  </div>
-                  
-                  <h1>${meal.strMeal}</h1><br>
-                  <h5 >Ingredients</h5><br>
-
-                  <div id="ingredient">
-                  
-                        <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> TEST </p>
-
+        const informationHtml = `
+        <div class="row d-flex justify-content-center-flex justify-content-center">
+                <div class="col-md-5 informations">
+                    <div class="info-image">
+                        <img src="${meal.strMealThumb}" width="100%" alt="">
                     </div>
                   
-              </div>
+                        <h1>${meal.strMeal}</h1><br>
+                        <h5 >Ingredients</h5><br>
 
-              
+                    <div id="ingredient-list">
+                  
+                    </div>
+                  
+                </div>
 
-          </div>
+         </div>
     
-    
-    
-        `
-        ingredientItem.innerHTML = card;
+        `;
+        ingredientItem.innerHTML = informationHtml;
         showIngredientsSection.appendChild(ingredientItem);
 
 
-        const ingredientList = document.getElementById('ingredient');
-        let ingredientCard = ``;
+        const ingredientList = document.getElementById('ingredient-list');
+        let ingredientInformations = " ";
 
-        ingredientsArray.forEach((ingredient , index) => {
-            const measure = measureArray[index];
+        strIngredientArray.forEach((ingredient , index) => {
+            const measure = strMeasureArray[index];
             console.log(measure, ingredient);
 
-            ingredientCard += `
+            ingredientInformations += `
             <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> ${measure} ${ingredient} </p>
 
             `
               
         });
 
-        ingredientList.innerHTML = ingredientCard;
+        ingredientList.innerHTML = ingredientInformations;
 
-        console.log(ingredientCard);
-        
-
-
-    })
+      })
 }
 
-// getIngredientsAndMeasure(52771);
-
+// ingredients item show function ends here
